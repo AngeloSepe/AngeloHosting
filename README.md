@@ -1,4 +1,4 @@
 # Exercise for SW DEV RR
 
-1)Answers are in the Doc folder
-2)Code in C for exercise 1 is in the Code folder
+1)Answers for the three exercise are in the Doc folder
+2)The Coding part of exercise is present the Code folder as C file.

@@ -30,6 +30,7 @@ void list_sorting();
 int main(){
 	
 	char menu_option;
+    int difficulty;
 
     printf(" Exercise #1 (Data read and manipulation)\n");
     printf("------------------------------------------\n\n");
@@ -41,7 +42,7 @@ int main(){
     printf("c. Search for an entry.\n");
     printf("d. Sort the list options.\n");
     printf("e. Quit.\n");
-    printf("Please enter an option from the main menu: ");
+    printf(" Please enter an option from the main menu: ");
     scanf(" %c", &menu_option);
     switch(menu_option){
 
@@ -126,7 +127,6 @@ void search_entry(){
 	
 	printf("Press 1 to look up by ID or 2 by Name: ");
 	scanf (" %c",&Search_sel);// get keyboard input
-	
 
 	switch(Search_sel)// loop the database with strcompare by case
 	{ 
@@ -164,10 +164,9 @@ void search_entry(){
 	     	
 	    default:
 	         printf("Invalid Query or No Data available\n" );
-	         break;
 			 }
 
-	if (index==0){printf("Item Not found!\n" ); return;
+	if (index==0){printf("Item Not found!\n" );
 	}
 	if (index>0){
 	printf("\nFound %i items matching the query\n",index);

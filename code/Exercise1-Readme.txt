@@ -1,0 +1,1 @@
+The program will read any CSV file with the first line as HEADER, which will be taken automatically as the name of the column when priting research a search query.
