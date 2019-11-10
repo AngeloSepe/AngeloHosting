@@ -9,13 +9,13 @@
 #define max_search_char 64
 
 // Structures allocation
-struct game {
+struct database {
 char id [32];
 char name[64];
 char age[10]; // age taken as a string since it's easier to manipulate, can be converted to int when necessary
 char data[512];	 	
 };
-struct game games[512]; // max allocation
+struct database list[512]; // max allocation
 // global variables
 int entry_counter=0; // entries counter for max row lenght
 
@@ -95,10 +95,10 @@ FILE *myfile=fopen("DATA.csv","r");
 
 	// read entries and header [0]
 	while(fgets(myline,200,(FILE*)myfile) !=NULL ){
-			strcpy(games[i].id,strtok(myline,delimiter));
-			strcpy(games[i].name,strtok(NULL,delimiter));
-			strcpy(games[i].age,strtok(NULL,delimiter));
-			strcpy(games[i].data,strtok(NULL,delimiter));
+			strcpy(list[i].id,strtok(myline,delimiter));
+			strcpy(list[i].name,strtok(NULL,delimiter));
+			strcpy(list[i].age,strtok(NULL,delimiter));
+			strcpy(list[i].data,strtok(NULL,delimiter));
 			i++;
 	}
 	
@@ -110,8 +110,8 @@ void printList(){
 
 printf("---------------------------------------------------------------------------------\n");
 for (int i = 0; i <= entry_counter; i++){
-    if (games[i].id != 0)
-    printf("%s\t\t\t%s\t\t\t%s\t%s",games[i].id,games[i].name,games[i].age,games[i].data);
+    if (list[i].id != 0)
+    printf("%s\t\t\t%s\t\t\t%s\t%s",list[i].id,list[i].name,list[i].age,list[i].data);
     else
         break;
     }
@@ -139,7 +139,7 @@ void search_entry(){
 			toSearch[len-1]=0; // cut the new line after a string
 			}
 			for (int i = 1; i <= entry_counter; i++){ 
-	     			if (strcmpi(games[i].id,toSearch)==0) {
+	     			if (strcmpi(list[i].id,toSearch)==0) {
 	        		 index_list[index]=i;
 	         		//printf("\nFound in entry n. %i and put in index_list n. %i",index_list[index],index);
 	         		index++;
@@ -155,7 +155,7 @@ void search_entry(){
 			toSearch[len-1]=0; // cut the new line after a string
 			}
 	     	for (int i = 1; i <= entry_counter; i++){ 
-		     	if (strcmpi(games[i].name,toSearch)==0) {
+		     	if (strcmpi(list[i].name,toSearch)==0) {
 		         index_list[index]=i;
 		         //printf("\nFound in entry n. %i and put in index_list n. %i",index_list[index],index);
 		         index++;
@@ -170,11 +170,11 @@ void search_entry(){
 	}
 	if (index>0){
 	printf("\nFound %i items matching the query\n",index);
-	printf("\n|%10s |%10s |%10s |%10s\n", games[0].id, games[0].name,games[0].age,games[0].data);
+	printf("\n|%10s |%10s |%10s |%10s\n", list[0].id, list[0].name,list[0].age,list[0].data);
 	printf("---------------------------------------------------------------------------------\n");
 		for (int j=0; j<index; j++){	
 			temp_idx=index_list[j];
-	   		 printf("\n|%10s |%10s |%10s |%10s", games[temp_idx].id, games[temp_idx].name,games[temp_idx].age,games[temp_idx].data);
+	   		 printf("\n|%10s |%10s |%10s |%10s", list[temp_idx].id, list[temp_idx].name,list[temp_idx].age,list[temp_idx].data);
 				}
 	
 				}
@@ -185,7 +185,7 @@ void list_sorting(){
 	char Sort_select='0';char Sort_select2='0';
 	int n=entry_counter+1; // Max n. of entries from global
 	int j; bool print_enable=false;
-    game temp;
+    database temp;
     
 	printf("\nNumber of entries in the %i\n",n);
 	printf("Select Sort Column, type 1 for ID or 2 to sort by Name:");
@@ -203,11 +203,11 @@ switch (Sort_select){
 			    printf("Sorting ID by ascending order...\n");
 				for(int i = 1; i < n; i++){
 	        	j	 = i - 1;
-	        	while( j > 0 && strcmp( games[j+1].id, games[j].id ) < 0 )
+	        	while( j > 0 && strcmp( list[j+1].id, list[j].id ) < 0 )
 	        	{
-	            temp =  games[j + 1];
-	            games[j+1] = games[j];
-	            games[j] = temp;
+	            temp =  list[j + 1];
+	            list[j+1] = list[j];
+	            list[j] = temp;
 	            j--;
 	        		}
     			}
@@ -217,11 +217,11 @@ switch (Sort_select){
 				printf("Sorting ID by descending order...\n");;
 				for(int i = 1; i < n; i++){
 	        	j	 = i - 1;
-	        	while( j > 0 && strcmp( games[j+1].id, games[j].id ) > 0 )
+	        	while( j > 0 && strcmp( list[j+1].id, list[j].id ) > 0 )
 	        	{
-	            temp =  games[j + 1];
-	            games[j+1] = games[j];
-	            games[j] = temp;
+	            temp =  list[j + 1];
+	            list[j+1] = list[j];
+	            list[j] = temp;
 	            j--;
 	        		}
     			}
@@ -235,11 +235,11 @@ switch (Sort_select){
 	case '2': // Name Sorting (only ascending/alphabetically)	
 				for(int i = 1; i < n; i++){
 	        	j	 = i - 1;
-	        	while( j > 0 && strcmp( games[j+1].name, games[j].name ) < 0 )
+	        	while( j > 0 && strcmp( list[j+1].name, list[j].name ) < 0 )
 	        	{
-	            temp =  games[j + 1];
-	            games[j+1] = games[j];
-	            games[j] = temp;
+	            temp =  list[j + 1];
+	            list[j+1] = list[j];
+	            list[j] = temp;
 	            j--;
 	        		}
     			}
@@ -254,7 +254,7 @@ if (print_enable){
 	    printf("\n-------------------------------------------------------------------------------\n");
 	    for(int i=0;i<=n;i++)
 	    {
-	        printf("%s\t\t\t%s\t\t\t%s\t%s",games[i].id,games[i].name,games[i].age,games[i].data);
+	        printf("%s\t\t\t%s\t\t\t%s\t%s",list[i].id,list[i].name,list[i].age,list[i].data);
 	    }
 	}
 else{
