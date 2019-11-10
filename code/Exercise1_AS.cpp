@@ -157,7 +157,6 @@ void search_entry(){
 	     	for (int i = 1; i <= entry_counter; i++){ 
 		     	if (strcmpi(list[i].name,toSearch)==0) {
 		         index_list[index]=i;
-		         //printf("\nFound in entry n. %i and put in index_list n. %i",index_list[index],index);
 		         index++;
 		     	}}
 	     	break;
@@ -169,7 +168,7 @@ void search_entry(){
 
 	if (index==0){printf("Item Not found!\n" ); return;
 	}
-	if (index>0){
+	if (index>0){// print table
 	printf("\nFound %i items matching the query\n",index);
 	printf("\n|%10s |%10s |%10s |%10s\n", list[0].id, list[0].name,list[0].age,list[0].data);
 	printf("---------------------------------------------------------------------------------\n");
